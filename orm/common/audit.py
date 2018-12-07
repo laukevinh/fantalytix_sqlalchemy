@@ -1,5 +1,5 @@
 """Helper object for the four audit columns
-common amongst all fantalytix tables.
+common among all fantalytix tables.
 """
 
 from sqlalchemy import Column, String, DateTime
