@@ -4,7 +4,7 @@ common among all fantalytix tables.
 
 from sqlalchemy import Column, String, DateTime
 
-class Audit:
+class AuditEntity:
 
     created_by = Column(String(255))
     creation_date = Column(DateTime)
@@ -12,4 +12,4 @@ class Audit:
     last_updated_date = Column(DateTime)
 
     def __repr__(self):
-        return "<Audit(object)>"
+        return "<AuditEntity(object)>"
