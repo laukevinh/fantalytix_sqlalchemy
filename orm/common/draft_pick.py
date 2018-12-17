@@ -11,22 +11,23 @@ class DraftPick(Base, AuditEntity):
     __tablename__ = 'draft_picks'
     __table_args__ = (
         PrimaryKeyConstraint(
+            'league_id',
             'year', 
-            'round', 
-            'pick', 
+            'overall_pick', 
             name='draft_picks_pkey'),
         {
             'schema':'fantalytix',
         }
     )
 
+    league_id = Column(Integer, nullable=False)
     year = Column(Date, nullable=False)
     round = Column(Integer, nullable=False)
-    pick = Column(Integer, nullable=False)
+    pick_in_round = Column(Integer, nullable=False)
+    overall_pick = Column(Integer, nullable=False)
     team_id = Column(Integer, nullable=False)
     player_id = Column(BigInteger, nullable=False)
-    league = Column(String(10), nullable=False)
 
     def __repr__(self):
-        return "<DraftPick(year={}, pick='{}')>".format(
-            self.year.strftime('%Y'), self.pick)
+        return "<DraftPick(league_id={}, year={}, overall_pick='{}')>".format(
+            self.league_id, self.year.strftime('%Y'), self.overall_pick)

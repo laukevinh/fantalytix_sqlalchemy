@@ -15,24 +15,29 @@ class TestLeagueORM(unittest.TestCase):
         Session = sessionmaker(bind=self.engine)
         self.session = Session()
 
+    def tearDown(self):
+        self.session.query(League).delete()
+        self.session.commit()
+        self.session.close()
+
     def test_league(self):
         NBA = League(
             name='National Basketball Association',
             abbreviation='NBA',
             sport='basketball',
             created_by='pycrawl',
-            creation_date=datetime(2018, 1, 1, 0, 0, 0, tzinfo=timezone.utc),
-            last_updated_by='pycrawl',
-            last_updated_date=datetime(2018, 2, 2, 0, 0, 0, tzinfo=timezone.utc)
+            creation_date=datetime.now(tz=timezone.utc),
+            last_updated_by=None,
+            last_updated_date=None
         )
         NFL = League(
             name='National Football League',
             abbreviation='Nfl',
             sport='football',
             created_by='jcrawl',
-            creation_date=datetime(2017, 1, 1, 0, 0, 0, tzinfo=timezone.utc),
-            last_updated_by='jcrawl',
-            last_updated_date=datetime(2017, 2, 2, 0, 0, 0, tzinfo=timezone.utc)
+            creation_date=datetime.now(tz=timezone.utc),
+            last_updated_by=None,
+            last_updated_date=None
         )
         self.session.add(NBA)
         self.session.add(NFL)

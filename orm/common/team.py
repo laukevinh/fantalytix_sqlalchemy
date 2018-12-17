@@ -14,7 +14,6 @@ class Team(Base, AuditEntity):
     name = Column(String(255), nullable=False, unique=True)
     abbreviation = Column(String(10), nullable=False)
     status = Column(String(25), nullable=False)
-    league = Column(String(10), nullable=False)
 
     def __repr__(self):
         return "<Team(name='{}')>".format(self.name)
