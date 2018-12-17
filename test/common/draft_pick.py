@@ -15,6 +15,7 @@ from sqlalchemy.orm import sessionmaker
 
 from orm.common.player import Player
 from orm.common.team import Team
+from orm.common.league import League
 from orm.common.draft_pick import DraftPick
 from test.settings import CONNECTION
 
@@ -51,22 +52,33 @@ class TestDraftPickORM(unittest.TestCase):
             name='Golden State Warriors',
             abbreviation='GSW',
             status='active',
-            league='NBA',
             created_by='pycrawl',
             creation_date=datetime.now(tz=timezone.utc),
             last_updated_by=None,
             last_updated_date=None
         )
         self.session.add(team)
+
+        league = League(
+            name='National Basketball Association',
+            abbreviation='NBA',
+            sport='basketball',
+            created_by='pycrawl',
+            creation_date=datetime.now(tz=timezone.utc),
+            last_updated_by=None,
+            last_updated_date=None
+        )
+        self.session.add(league)
         self.session.commit()
 
         draft_pick = DraftPick(
+            league_id=league.id,
             year=date(2018, 6, 21),
             round=1,
-            pick=28,
+            pick_in_round=28,
+            overall_pick=28,
             team_id=team.id,
             player_id=player.id,
-            league='NBA',
             created_by='pycrawl',
             creation_date=datetime.now(tz=timezone.utc),
             last_updated_by=None,
