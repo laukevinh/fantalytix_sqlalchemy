@@ -30,6 +30,8 @@ class TestLeagueORM(unittest.TestCase):
             last_updated_by=None,
             last_updated_date=None
         )
+        self.session.add(NBA)
+
         NFL = League(
             name='National Football League',
             abbreviation='Nfl',
@@ -39,16 +41,9 @@ class TestLeagueORM(unittest.TestCase):
             last_updated_by=None,
             last_updated_date=None
         )
-        self.session.add(NBA)
         self.session.add(NFL)
-        test_nba = self.session.query(League).filter_by(
-            name='National Basketball Association')
-        self.assertTrue(NBA is test_nba.first())
-        self.assertEqual(NBA.created_by, 'pycrawl')
-        test_nfl = self.session.query(League).filter_by(
-            name='National Football League')
-        self.assertTrue(NFL is test_nfl.first())
-        self.assertEqual(NFL.created_by, 'jcrawl')
+
+        self.session.commit()
 
 if __name__ == '__main__':
     unittest.main()
