@@ -13,6 +13,8 @@ from sqlalchemy import create_engine, Date, cast
 from sqlalchemy.orm import sessionmaker
 
 from orm.common.team import Team
+from orm.common.league import League
+from orm.common.season import Season
 from orm.nba.nba_game import NBAGame
 from orm.nba.nba_game_url import NBAGameUrl
 from test.settings import CONNECTION
@@ -76,10 +78,35 @@ class TestTeamNBAGameORM(unittest.TestCase):
         )
         self.session.add(teamD)
 
+        league = League(
+            name='National Basketball Association',
+            abbreviation='NBA',
+            sport='basketball',
+            created_by='pycrawl',
+            creation_date=datetime.now(tz=timezone.utc),
+            last_updated_by=None,
+            last_updated_date=None
+        )
+        self.session.add(league)
+
+        self.session.commit()
+
+        season = Season(
+            league_id=league.id,
+            start_date=date(2018, 10, 16),
+            end_date=date(2019, 4, 10),
+            start_year=date(2018, 1, 1),
+            end_year=date(2019, 1, 1),
+            created_by='pycrawl',
+            creation_date=datetime.now(tz=timezone.utc),
+            last_updated_by=None,
+            last_updated_date=None
+        )
+        self.session.add(season)
         self.session.commit()
 
         nba_game_1 = NBAGame(
-            season='2018-19',
+            season_id=season.id,
             home_team_id=teamB.id,
             away_team_id=teamA.id,
             game_date=datetime(2018, 12, 5, 19, 0, 0, tzinfo=timezone.utc),
@@ -97,7 +124,7 @@ class TestTeamNBAGameORM(unittest.TestCase):
         self.session.add(nba_game_1)
 
         nba_game_2 = NBAGame(
-            season='2018-19',
+            season_id=season.id,
             home_team_id=teamD.id,
             away_team_id=teamC.id,
             game_date=datetime(2018, 12, 5, 20, 30, 0, tzinfo=timezone.utc),
