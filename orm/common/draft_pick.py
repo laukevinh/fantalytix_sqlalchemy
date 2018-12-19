@@ -11,8 +11,7 @@ class DraftPick(Base, AuditEntity):
     __tablename__ = 'draft_picks'
     __table_args__ = (
         PrimaryKeyConstraint(
-            'league_id',
-            'year', 
+            'season_id',
             'overall_pick', 
             name='draft_picks_pkey'),
         {
@@ -20,8 +19,7 @@ class DraftPick(Base, AuditEntity):
         }
     )
 
-    league_id = Column(Integer, nullable=False)
-    year = Column(Date, nullable=False)
+    season_id = Column(Integer, nullable=False)
     round = Column(Integer, nullable=False)
     pick_in_round = Column(Integer, nullable=False)
     overall_pick = Column(Integer, nullable=False)
@@ -29,5 +27,5 @@ class DraftPick(Base, AuditEntity):
     player_id = Column(BigInteger, nullable=False)
 
     def __repr__(self):
-        return "<DraftPick(league_id={}, year={}, overall_pick='{}')>".format(
-            self.league_id, self.year.strftime('%Y'), self.overall_pick)
+        return "<DraftPick(season_id={}, overall_pick='{}')>".format(
+            self.season_id, self.overall_pick)

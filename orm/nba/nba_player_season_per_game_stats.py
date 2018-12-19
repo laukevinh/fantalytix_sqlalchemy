@@ -11,7 +11,7 @@ class NBAPlayerSeasonPerGameStats(Base, AuditEntity):
     __tablename__ = 'nba_player_season_per_game_stats'
     __table_args__ = (
         PrimaryKeyConstraint(
-            'season',
+            'season_id',
             'player_id', 
             'team_id',
             name='nba_player_season_per_game_average_stats_pkey'),
@@ -20,7 +20,7 @@ class NBAPlayerSeasonPerGameStats(Base, AuditEntity):
         }
     )
 
-    season = Column(String(15), nullable=False)
+    season_id = Column(Integer, nullable=False)
     player_id = Column(BigInteger, nullable=False)
     team_id = Column(Integer, nullable=False)
     games_played = Column(SmallInteger)

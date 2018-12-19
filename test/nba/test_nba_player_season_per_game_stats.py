@@ -15,6 +15,8 @@ from sqlalchemy.orm import sessionmaker
 from orm.nba.nba_player_season_per_game_stats import NBAPlayerSeasonPerGameStats
 from orm.common.player import Player
 from orm.common.team import Team
+from orm.common.league import League
+from orm.common.season import Season
 from orm.nba.nba_game import NBAGame
 from test.settings import CONNECTION
 
@@ -70,10 +72,36 @@ class TestNBAPlayerSeasonPerGameStatsORM(unittest.TestCase):
         )
         self.session.add(player)
 
+        league = League(
+            name='National Basketball Association',
+            abbreviation='NBA',
+            sport='basketball',
+            created_by='pycrawl',
+            creation_date=datetime.now(tz=timezone.utc),
+            last_updated_by=None,
+            last_updated_date=None
+        )
+        self.session.add(league)
+
+        self.session.commit()
+
+        season = Season(
+            league_id=league.id,
+            start_date=date(2018, 10, 16),
+            end_date=date(2019, 4, 10),
+            start_year=date(2018, 1, 1),
+            end_year=date(2019, 1, 1),
+            created_by='pycrawl',
+            creation_date=datetime.now(tz=timezone.utc),
+            last_updated_by=None,
+            last_updated_date=None
+        )
+        self.session.add(season)
+
         self.session.commit()
 
         nba_game = NBAGame(
-            season='2018-19',
+            season_id=season.id,
             home_team_id=teamB.id,
             away_team_id=teamA.id,
             game_date=datetime(2018, 12, 5, 19, 0, 0, tzinfo=timezone.utc),
@@ -93,7 +121,7 @@ class TestNBAPlayerSeasonPerGameStatsORM(unittest.TestCase):
         self.session.commit()
 
         player_season_per_game_stats = NBAPlayerSeasonPerGameStats(
-            season = '2017-18',
+            season_id=season.id,
             player_id=player.id,
             team_id=teamA.id,
             games_played=68,

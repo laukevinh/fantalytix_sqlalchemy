@@ -12,7 +12,7 @@ class NBAGame(Base, AuditEntity):
     __table_args__ = {'schema':'fantalytix'}
 
     id = Column(BigInteger, primary_key=True, nullable=False)
-    season = Column(String(15), nullable=False)
+    season_id = Column(Integer, nullable=False)
     home_team_id = Column(Integer, nullable=False)
     away_team_id = Column(Integer, nullable=False)
     game_date = Column(DateTime)
