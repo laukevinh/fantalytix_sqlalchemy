@@ -2,7 +2,7 @@ from sqlalchemy.ext.declarative import declarative_base
 
 from sqlalchemy import Column, Integer, String
 
-from orm.common.audit_entity import AuditEntity
+from fantalytix_sqlalchemy.orm.common.audit_entity import AuditEntity
 
 Base = declarative_base()
 

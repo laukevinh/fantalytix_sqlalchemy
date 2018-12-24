@@ -12,12 +12,12 @@ from datetime import date, datetime, timezone
 from sqlalchemy import create_engine, Date, cast
 from sqlalchemy.orm import sessionmaker
 
-from orm.common.team import Team
-from orm.common.league import League
-from orm.common.season import Season
-from orm.nba.nba_game import NBAGame
-from orm.nba.nba_game_url import NBAGameUrl
-from test.settings import CONNECTION
+from fantalytix_sqlalchemy.orm.common.team import Team
+from fantalytix_sqlalchemy.orm.common.league import League
+from fantalytix_sqlalchemy.orm.common.season import Season
+from fantalytix_sqlalchemy.orm.nba.nba_game import NBAGame
+from fantalytix_sqlalchemy.orm.nba.nba_game_url import NBAGameUrl
+from fantalytix_sqlalchemy.test.settings import CONNECTION
 
 class TestTeamNBAGameORM(unittest.TestCase):
     
@@ -39,9 +39,9 @@ class TestTeamNBAGameORM(unittest.TestCase):
             abbreviation='GSW',
             status='active',
             created_by='pycrawl',
-            creation_date=datetime(2018, 1, 1, 0, 0, 0, tzinfo=timezone.utc),
-            last_updated_by='pycrawl',
-            last_updated_date=datetime(2018, 2, 2, 0, 0, 0, tzinfo=timezone.utc)
+            creation_date=datetime.now(tz=timezone.utc),
+            last_updated_by=None,
+            last_updated_date=None
         )
         self.session.add(teamA)
 
@@ -50,9 +50,9 @@ class TestTeamNBAGameORM(unittest.TestCase):
             abbreviation='CLE',
             status='active',
             created_by='pycrawl',
-            creation_date=datetime(2018, 1, 1, 0, 0, 0, tzinfo=timezone.utc),
-            last_updated_by='pycrawl',
-            last_updated_date=datetime(2018, 2, 2, 0, 0, 0, tzinfo=timezone.utc)
+            creation_date=datetime.now(tz=timezone.utc),
+            last_updated_by=None,
+            last_updated_date=None
         )
         self.session.add(teamB)
 
@@ -61,9 +61,9 @@ class TestTeamNBAGameORM(unittest.TestCase):
             abbreviation='SAS',
             status='active',
             created_by='pycrawl',
-            creation_date=datetime(2018, 1, 1, 0, 0, 0, tzinfo=timezone.utc),
-            last_updated_by='pycrawl',
-            last_updated_date=datetime(2018, 2, 2, 0, 0, 0, tzinfo=timezone.utc)
+            creation_date=datetime.now(tz=timezone.utc),
+            last_updated_by=None,
+            last_updated_date=None
         )
         self.session.add(teamC)
 
@@ -72,9 +72,9 @@ class TestTeamNBAGameORM(unittest.TestCase):
             abbreviation='LAL',
             status='active',
             created_by='pycrawl',
-            creation_date=datetime(2018, 1, 1, 0, 0, 0, tzinfo=timezone.utc),
-            last_updated_by='pycrawl',
-            last_updated_date=datetime(2018, 2, 2, 0, 0, 0, tzinfo=timezone.utc)
+            creation_date=datetime.now(tz=timezone.utc),
+            last_updated_by=None,
+            last_updated_date=None
         )
         self.session.add(teamD)
 
@@ -117,7 +117,7 @@ class TestTeamNBAGameORM(unittest.TestCase):
             status='scheduled',
             type='season',
             created_by='pycrawl',
-            creation_date=datetime(2018, 12, 5, 19, 0, 0, tzinfo=timezone.utc),
+            creation_date=datetime.now(tz=timezone.utc),
             last_updated_by=None,
             last_updated_date=None
         )
@@ -135,7 +135,7 @@ class TestTeamNBAGameORM(unittest.TestCase):
             status='scheduled',
             type='season',
             created_by='pycrawl',
-            creation_date=datetime(2018, 12, 5, 19, 0, 0, tzinfo=timezone.utc),
+            creation_date=datetime.now(tz=timezone.utc),
             last_updated_by=None,
             last_updated_date=None
         )
@@ -149,7 +149,7 @@ class TestTeamNBAGameORM(unittest.TestCase):
                    'boxscores/201812050CLE.html'),
             site = 'basketball-reference',
             created_by='pycrawl',
-            creation_date=datetime(2018, 12, 5, 19, 0, 0, tzinfo=timezone.utc),
+            creation_date=datetime.now(tz=timezone.utc),
             last_updated_by=None,
             last_updated_date=None
         )

@@ -12,13 +12,14 @@ from datetime import date, datetime, timezone, time
 from sqlalchemy import create_engine, Date, cast
 from sqlalchemy.orm import sessionmaker
 
-from orm.nba.nba_player_season_per_game_stats import NBAPlayerSeasonPerGameStats
-from orm.common.player import Player
-from orm.common.team import Team
-from orm.common.league import League
-from orm.common.season import Season
-from orm.nba.nba_game import NBAGame
-from test.settings import CONNECTION
+from fantalytix_sqlalchemy.orm.common.player import Player
+from fantalytix_sqlalchemy.orm.common.team import Team
+from fantalytix_sqlalchemy.orm.common.league import League
+from fantalytix_sqlalchemy.orm.common.season import Season
+from fantalytix_sqlalchemy.orm.nba.nba_game import NBAGame
+from fantalytix_sqlalchemy.orm.nba.nba_player_season_per_game_stats import (
+    NBAPlayerSeasonPerGameStats)
+from fantalytix_sqlalchemy.test.settings import CONNECTION
 
 class TestNBAPlayerSeasonPerGameStatsORM(unittest.TestCase):
     

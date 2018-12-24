@@ -5,8 +5,8 @@ from datetime import datetime, timezone
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-from orm.common.player_url import PlayerUrl
-from test.settings import CONNECTION
+from fantalytix_sqlalchemy.orm.common.player_url import PlayerUrl
+from fantalytix_sqlalchemy.test.settings import CONNECTION
 
 class TestPlayerUrlORM(unittest.TestCase):
     
@@ -21,9 +21,9 @@ class TestPlayerUrlORM(unittest.TestCase):
             url='https://www.basketball-reference.com/players/j/jamesle01.html', 
             site='basketball-reference',
             created_by='pycrawl',
-            creation_date=datetime(2018, 1, 1, 0, 0, 0, tzinfo=timezone.utc),
-            last_updated_by='pycrawl',
-            last_updated_date=datetime(2018, 2, 2, 0, 0, 0, tzinfo=timezone.utc)
+            creation_date=datetime.now(tz=timezone.utc),
+            last_updated_by=None,
+            last_updated_date=None
         )
         self.session.add(LBJ_URL)
         test_player_url = self.session.query(PlayerUrl).filter_by(url='https://www.basketball-reference.com/players/j/jamesle01.html')
