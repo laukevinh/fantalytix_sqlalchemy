@@ -5,8 +5,8 @@ from datetime import date, datetime, timezone
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-from orm.common.team import Team
-from test.settings import CONNECTION
+from fantalytix_sqlalchemy.orm.common.team import Team
+from fantalytix_sqlalchemy.test.settings import CONNECTION
 
 class TestTeamORM(unittest.TestCase):
     
@@ -21,9 +21,9 @@ class TestTeamORM(unittest.TestCase):
             abbreviation= 'GSW',
             status='active',
             created_by='pycrawl',
-            creation_date=datetime(2018, 1, 1, 0, 0, 0, tzinfo=timezone.utc),
-            last_updated_by='pycrawl',
-            last_updated_date=datetime(2018, 2, 2, 0, 0, 0, tzinfo=timezone.utc)
+            creation_date=datetime.now(tz=timezone.utc),
+            last_updated_by=None,
+            last_updated_date=None
         )
     
 
@@ -32,9 +32,9 @@ class TestTeamORM(unittest.TestCase):
             abbreviation= 'PHO',
             status='active',
             created_by='jcrawl',
-            creation_date=datetime(2017, 1, 1, 0, 0, 0, tzinfo=timezone.utc),
-            last_updated_by='jcrawl',
-            last_updated_date=datetime(2017, 2, 2, 0, 0, 0, tzinfo=timezone.utc)
+            creation_date=datetime.now(tz=timezone.utc),
+            last_updated_by=None,
+            last_updated_date=None
         )
 
         self.session.add(GSW)

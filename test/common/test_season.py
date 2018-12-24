@@ -13,9 +13,9 @@ from datetime import date, datetime, timezone
 from sqlalchemy import create_engine, Date, cast
 from sqlalchemy.orm import sessionmaker
 
-from orm.common.league import League
-from orm.common.season import Season
-from test.settings import CONNECTION
+from fantalytix_sqlalchemy.orm.common.league import League
+from fantalytix_sqlalchemy.orm.common.season import Season
+from fantalytix_sqlalchemy.test.settings import CONNECTION
 
 class TestSeasonORM(unittest.TestCase):
     

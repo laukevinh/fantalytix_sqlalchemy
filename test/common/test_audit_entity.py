@@ -2,7 +2,7 @@ import unittest
 
 from datetime import datetime, timezone
 
-from orm.common.audit_entity import AuditEntity
+from fantalytix_sqlalchemy.orm.common.audit_entity import AuditEntity
 
 class TestAuditEntityORM(unittest.TestCase):
 

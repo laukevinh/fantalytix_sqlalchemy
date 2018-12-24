@@ -5,8 +5,8 @@ from datetime import date, datetime, timezone
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-from orm.common.player import Player
-from test.settings import CONNECTION
+from fantalytix_sqlalchemy.orm.common.player import Player
+from fantalytix_sqlalchemy.test.settings import CONNECTION
 
 class TestPlayerORM(unittest.TestCase):
     
@@ -24,9 +24,9 @@ class TestPlayerORM(unittest.TestCase):
             birthplace = 'in Akron, Ohio',
             nationality = 'us',
             created_by='pycrawl',
-            creation_date=datetime(2018, 1, 1, 0, 0, 0, tzinfo=timezone.utc),
-            last_updated_by='pycrawl',
-            last_updated_date=datetime(2018, 2, 2, 0, 0, 0, tzinfo=timezone.utc)
+            creation_date=datetime.now(tz=timezone.utc),
+            last_updated_by=None,
+            last_updated_date=None
         )
         self.session.add(LBJ)
         test_player = self.session.query(Player).filter_by(name='LeBron James')
