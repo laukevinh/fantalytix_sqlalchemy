@@ -26,7 +26,9 @@ class TestPlayerUrlORM(unittest.TestCase):
             last_updated_date=None
         )
         self.session.add(LBJ_URL)
-        test_player_url = self.session.query(PlayerUrl).filter_by(url='https://www.basketball-reference.com/players/j/jamesle01.html')
+        test_player_url = self.session.query(PlayerUrl)\
+            .filter_by(url=('https://www.basketball-reference.com/'
+                            'players/j/jamesle01.html'))
         self.assertTrue(LBJ_URL is test_player_url.first())
 
 if __name__ == '__main__':

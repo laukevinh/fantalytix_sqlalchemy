@@ -30,6 +30,8 @@ class TestDraftPickORM(unittest.TestCase):
     def tearDown(self):
         self.session.query(Player).delete()
         self.session.query(Team).delete()
+        self.session.query(League).delete()
+        self.session.query(Season).delete()
         self.session.query(DraftPick).delete()
         self.session.commit()
         self.session.close()
