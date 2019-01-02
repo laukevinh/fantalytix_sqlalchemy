@@ -11,7 +11,7 @@ class League(Base, AuditEntity):
     __table_args__ = {'schema':'fantalytix'}
 
     id = Column(Integer, primary_key=True, nullable=False)
-    name = Column(String(255), nullable=False)
+    name = Column(String(255), unique=True, nullable=False)
     abbreviation = Column(String(25))
     sport = Column(String(50), nullable=False)
 

@@ -34,7 +34,7 @@ class TestLeagueORM(unittest.TestCase):
 
         NFL = League(
             name='National Football League',
-            abbreviation='Nfl',
+            abbreviation='NFL',
             sport='football',
             created_by='jcrawl',
             creation_date=datetime.now(tz=timezone.utc),
