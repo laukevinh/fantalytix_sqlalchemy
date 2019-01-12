@@ -12,8 +12,7 @@ class Season(Base, AuditEntity):
         UniqueConstraint(
             'league_id',
             'start_year',
-            'end_year',
-            name='seasons_pkey'),
+            'end_year'),
         {
             'schema':'fantalytix',
         }

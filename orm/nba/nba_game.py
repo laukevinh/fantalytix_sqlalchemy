@@ -1,7 +1,7 @@
 from sqlalchemy.ext.declarative import declarative_base
 
 from sqlalchemy import (Column, BigInteger, Integer, 
-    String, DateTime)
+    String, DateTime, UniqueConstraint)
 
 from fantalytix_sqlalchemy.orm.common.audit_entity import AuditEntity
 
@@ -9,7 +9,16 @@ Base = declarative_base()
 
 class NBAGame(Base, AuditEntity):
     __tablename__ = 'nba_games'
-    __table_args__ = {'schema':'fantalytix'}
+    __table_args__ = (
+        UniqueConstraint(
+            'game_date',
+            'home_team_id',
+            'away_team_id'),
+        {
+            'schema':'fantalytix',
+        }
+    )
+
 
     id = Column(BigInteger, primary_key=True, nullable=False)
     season_id = Column(Integer, nullable=False)
