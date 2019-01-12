@@ -29,10 +29,11 @@ class TestNBAPlayerSeasonPerGameStatsORM(unittest.TestCase):
         self.session = Session()
 
     def tearDown(self):
-        self.session.query(NBAPlayerSeasonPerGameStats).delete()
+        self.session.query(League).delete()
         self.session.query(Player).delete()
         self.session.query(Team).delete()
         self.session.query(NBAGame).delete()
+        self.session.query(NBAPlayerSeasonPerGameStats).delete()
         self.session.commit()
         self.session.close()
 
