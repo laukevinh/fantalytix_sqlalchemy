@@ -15,7 +15,7 @@ from sqlalchemy.orm import sessionmaker
 
 from fantalytix_sqlalchemy.orm.common.league import League
 from fantalytix_sqlalchemy.orm.common.season import Season
-from fantalytix_sqlalchemy.test.settings import CONNECTION
+from ..settings import CONNECTION
 
 class TestSeasonORM(unittest.TestCase):
     

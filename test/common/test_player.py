@@ -6,7 +6,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
 from fantalytix_sqlalchemy.orm.common.player import Player
-from fantalytix_sqlalchemy.test.settings import CONNECTION
+from ..settings import CONNECTION
 
 class TestPlayerORM(unittest.TestCase):
     

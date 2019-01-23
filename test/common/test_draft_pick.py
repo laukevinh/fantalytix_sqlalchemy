@@ -18,7 +18,7 @@ from fantalytix_sqlalchemy.orm.common.team import Team
 from fantalytix_sqlalchemy.orm.common.league import League
 from fantalytix_sqlalchemy.orm.common.season import Season
 from fantalytix_sqlalchemy.orm.common.draft_pick import DraftPick
-from fantalytix_sqlalchemy.test.settings import CONNECTION
+from ..settings import CONNECTION
 
 class TestDraftPickORM(unittest.TestCase):
     
