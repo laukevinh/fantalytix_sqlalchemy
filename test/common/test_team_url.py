@@ -6,7 +6,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
 from fantalytix_sqlalchemy.orm.common.team_url import TeamUrl
-from fantalytix_sqlalchemy.test.settings import CONNECTION
+from ..settings import CONNECTION
 
 class TestTeamUrlORM(unittest.TestCase):
     
