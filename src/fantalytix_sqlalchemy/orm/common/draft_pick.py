@@ -1,11 +1,10 @@
-from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy import (
+    Column, BigInteger, Integer, String, Date, PrimaryKeyConstraint
+)
+from sqlalchemy.orm import relationship, remote, foreign
 
-from sqlalchemy import (Column, BigInteger, Integer, 
-    String, Date, PrimaryKeyConstraint)
-
-from fantalytix_sqlalchemy.orm.common.audit_entity import AuditEntity
-
-Base = declarative_base()
+from .base import Base
+from .audit_entity import AuditEntity
 
 class DraftPick(Base, AuditEntity):
     __tablename__ = 'draft_picks'
@@ -25,7 +24,27 @@ class DraftPick(Base, AuditEntity):
     overall_pick = Column(Integer, nullable=False)
     team_id = Column(Integer, nullable=False)
     player_id = Column(BigInteger, nullable=False)
+    season = relationship("Season",
+        primaryjoin="remote(Season.id)==foreign(DraftPick.season_id)"
+    )
+    team = relationship("Team",
+        primaryjoin="remote(Team.id)==foreign(DraftPick.team_id)"
+    )
+    player = relationship("Player",
+        primaryjoin="remote(Player.id)==foreign(DraftPick.player_id)"
+    )
 
     def __repr__(self):
-        return "<DraftPick(season_id={}, overall_pick='{}')>".format(
-            self.season_id, self.overall_pick)
+        return (
+            "<DraftPick("
+                "player='{}', "
+                "overall_pick='{}', "
+                "team='{}', "
+                "season='{}'"
+            ")>".format(
+                self.player.name, 
+                self.overall_pick, 
+                self.team.abbreviation, 
+                self.season.pretty_print_years()
+            )
+        )

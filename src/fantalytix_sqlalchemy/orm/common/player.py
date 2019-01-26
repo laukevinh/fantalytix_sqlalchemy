@@ -1,11 +1,8 @@
-from sqlalchemy.ext.declarative import declarative_base
-
 from sqlalchemy import (Column, BigInteger, Integer, String, Date,
     DateTime)
 
-from fantalytix_sqlalchemy.orm.common.audit_entity import AuditEntity
-
-Base = declarative_base()
+from .base import Base
+from .audit_entity import AuditEntity
 
 class Player(Base, AuditEntity):
     __tablename__ = 'players'

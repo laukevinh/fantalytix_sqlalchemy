@@ -5,7 +5,8 @@ from datetime import date, datetime, timezone
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-from fantalytix_sqlalchemy.orm.common.team_url import TeamUrl
+from fantalytix_sqlalchemy.orm.common import Team
+from fantalytix_sqlalchemy.orm.common import TeamUrl
 from ..settings import CONNECTION
 
 class TestTeamUrlORM(unittest.TestCase):
@@ -15,39 +16,34 @@ class TestTeamUrlORM(unittest.TestCase):
         Session = sessionmaker(bind=self.engine)
         self.session = Session()
 
+    def tearDown(self):
+        self.session.query(Team).delete()
+        self.session.query(TeamUrl).delete()
+        self.session.commit()
+        self.session.close()
+
     def test_team_url(self):
-        GSW_url = TeamUrl(
-            team_id = 1,
-            url = 'https://www.basketball-reference.com/teams/GSW/',
-            site = 'basketball-reference',
+        team = Team(
+            name = 'Golden State Warriors',
+            abbreviation= 'GSW',
+            status='active',
             created_by='pycrawl',
             creation_date=datetime.now(tz=timezone.utc),
-            last_updated_by=None,
-            last_updated_date=None
         )
-    
-        PHO_url = TeamUrl(
-            team_id = 2,
-            url = 'https://www.basketball-reference.com/teams/PHO/',
-            site = 'basketball-reference',
-            created_by='jcrawl',
+        self.session.add(team)
+        self.session.commit()
+
+        team_url = TeamUrl(
+            team=team,
+            url='https://www.basketball-reference.com/teams/GSW/',
+            site='basketball-reference',
+            created_by='pycrawl',
             creation_date=datetime.now(tz=timezone.utc),
-            last_updated_by=None,
-            last_updated_date=None
         )
+        self.session.add(team_url)
+        self.session.commit()
 
-        self.session.add(GSW_url)
-        self.session.add(PHO_url)
-
-        test_gsw = self.session.query(TeamUrl).filter_by(
-            url='https://www.basketball-reference.com/teams/GSW/')
-        self.assertTrue(GSW_url is test_gsw.first())
-        self.assertEqual(GSW_url.created_by, 'pycrawl')
-
-        test_phx = self.session.query(TeamUrl).filter_by(
-            url='https://www.basketball-reference.com/teams/PHO/')
-        self.assertTrue(PHO_url is test_phx.first())
-        self.assertEqual(PHO_url.created_by, 'jcrawl')
+        self.assertIs(self.session.query(TeamUrl).one().team, team)
 
 if __name__ == '__main__':
     unittest.main()

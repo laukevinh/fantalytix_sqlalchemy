@@ -1,13 +1,10 @@
-from urllib.parse import urlparse
+from sqlalchemy import (
+    Column, BigInteger, Integer, String, DateTime, PrimaryKeyConstraint
+)
+from sqlalchemy.orm import relationship, remote, foreign
 
-from sqlalchemy.ext.declarative import declarative_base
-
-from sqlalchemy import (Column, BigInteger, Integer, 
-    String, DateTime, PrimaryKeyConstraint)
-
-from fantalytix_sqlalchemy.orm.common.audit_entity import AuditEntity
-
-Base = declarative_base()
+from ..common.base import Base
+from ..common.audit_entity import AuditEntity
 
 class NBAGameUrl(Base, AuditEntity):
     __tablename__ = 'nba_game_urls'
@@ -24,9 +21,13 @@ class NBAGameUrl(Base, AuditEntity):
     nba_game_id = Column(BigInteger, nullable=False)
     url = Column(String(512), nullable=False)
     site = Column(String(50), nullable=False)
+    nba_game = relationship("NBAGame",
+        primaryjoin="remote(NBAGame.id)==foreign(NBAGameUrl.nba_game_id)"
+    )
 
     def __repr__(self):
-        return "<NBAGameUrl(nba_game_id={}, site={})>".format(
-            self.nba_game_id, 
-            urlparse(self.site).netloc or urlparse(self.site).path
+        return "<NBAGameUrl(home_team='{}', game_date='{}', site='{}')>".format(
+            self.nba_game.home_team.abbreviation, 
+            self.nba_game.get_game_date(),
+            self.site
         )

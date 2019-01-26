@@ -1,11 +1,11 @@
-from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy import (
+    Column, String, BigInteger, Integer, SmallInteger, Numeric, 
+    PrimaryKeyConstraint
+)
+from sqlalchemy.orm import relationship, remote, foreign
 
-from sqlalchemy import (Column, String, BigInteger, Integer, 
-    SmallInteger, Numeric, PrimaryKeyConstraint)
-
-from fantalytix_sqlalchemy.orm.common.audit_entity import AuditEntity
-
-Base = declarative_base()
+from ..common.base import Base
+from ..common.audit_entity import AuditEntity
 
 class NBAPlayerSeasonPerGameStats(Base, AuditEntity):
     __tablename__ = 'nba_player_season_per_game_stats'
@@ -43,7 +43,28 @@ class NBAPlayerSeasonPerGameStats(Base, AuditEntity):
     turnovers_per_game = Column(Numeric)
     personal_fouls_per_game = Column(Numeric)
     points_per_game = Column(Numeric)
+    season = relationship("Season",
+        primaryjoin=("remote(Season.id)=="
+                     "foreign(NBAPlayerSeasonPerGameStats.season_id)")
+    )
+    player = relationship("Player",
+        primaryjoin=("remote(Player.id)=="
+                     "foreign(NBAPlayerSeasonPerGameStats.player_id)")
+    )
+    team = relationship("Team",
+        primaryjoin=("remote(Team.id)=="
+                     "foreign(NBAPlayerSeasonPerGameStats.team_id)")
+    )
 
     def __repr__(self):
-        return "<NBAPlayerSeasonPerGameStats(nba_game_id={}, player_id='{}')>".format(
-            self.nba_game_id, self.player_id)
+        return (
+            "<NBAPlayerSeasonPerGameStats("
+                "player='{}', "
+                "team='{}', "
+                "season='{}'"
+            ")>".format(
+                self.player.name,
+                self.team.abbreviation,
+                self.season.pretty_print_years()
+            )
+        )

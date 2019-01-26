@@ -16,7 +16,7 @@ class TestPlayerORM(unittest.TestCase):
         self.session = Session()
 
     def test_player(self):
-        LBJ = Player(
+        player = Player(
             name='LeBron James',
             height = '6-8',
             weight = 250,
@@ -25,12 +25,9 @@ class TestPlayerORM(unittest.TestCase):
             nationality = 'us',
             created_by='pycrawl',
             creation_date=datetime.now(tz=timezone.utc),
-            last_updated_by=None,
-            last_updated_date=None
         )
-        self.session.add(LBJ)
-        test_player = self.session.query(Player).filter_by(name='LeBron James')
-        self.assertTrue(LBJ is test_player.first())
+        self.session.add(player)
+        self.assertIs(self.session.query(Player).one(), player)
 
 if __name__ == '__main__':
     unittest.main()
