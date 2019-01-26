@@ -1,13 +1,10 @@
-from urllib.parse import urlparse
+from sqlalchemy import (
+    Column, BigInteger, String, DateTime, PrimaryKeyConstraint
+)
+from sqlalchemy.orm import relationship, remote, foreign
 
-from sqlalchemy.ext.declarative import declarative_base
-
-from sqlalchemy import (Column, BigInteger, String, DateTime, 
-    PrimaryKeyConstraint)
-
-from fantalytix_sqlalchemy.orm.common.audit_entity import AuditEntity
-
-Base = declarative_base()
+from .base import Base
+from .audit_entity import AuditEntity
 
 class PlayerUrl(Base, AuditEntity):
     __tablename__ = 'player_urls'
@@ -24,7 +21,11 @@ class PlayerUrl(Base, AuditEntity):
     player_id = Column(BigInteger, nullable=False)
     site = Column(String(50), nullable=False)
     url = Column(String(512), unique=True, nullable=False)
+    player = relationship("Player",
+        primaryjoin="remote(Player.id)==foreign(PlayerUrl.player_id)"
+    )
 
     def __repr__(self):
-        return "<PlayerUrl(player_id={}, site='{}')>".format(
-            self.player_id, self.site)
+        return "<PlayerUrl(player={}, site='{}')>".format(
+            self.player.name, self.site
+        )

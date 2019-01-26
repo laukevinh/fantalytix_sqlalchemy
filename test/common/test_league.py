@@ -21,29 +21,18 @@ class TestLeagueORM(unittest.TestCase):
         self.session.close()
 
     def test_league(self):
-        NBA = League(
+        league = League(
             name='National Basketball Association',
             abbreviation='NBA',
             sport='basketball',
             created_by='pycrawl',
             creation_date=datetime.now(tz=timezone.utc),
-            last_updated_by=None,
-            last_updated_date=None
         )
-        self.session.add(NBA)
-
-        NFL = League(
-            name='National Football League',
-            abbreviation='NFL',
-            sport='football',
-            created_by='jcrawl',
-            creation_date=datetime.now(tz=timezone.utc),
-            last_updated_by=None,
-            last_updated_date=None
+        self.session.add(league)
+        self.assertEqual(
+            self.session.query(League).filter_by(abbreviation='NBA').one(),
+            league
         )
-        self.session.add(NFL)
-
-        self.session.commit()
 
 if __name__ == '__main__':
     unittest.main()
