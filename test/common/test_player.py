@@ -24,7 +24,6 @@ class TestPlayerORM(unittest.TestCase):
             birthplace = 'in Akron, Ohio',
             nationality = 'us',
             created_by='pycrawl',
-            creation_date=datetime.now(tz=timezone.utc),
         )
         self.session.add(player)
         self.assertIs(self.session.query(Player).one(), player)

@@ -30,7 +30,6 @@ class TestNBAGameORM(unittest.TestCase):
             abbreviation='GSW',
             status='active',
             created_by='pycrawl',
-            creation_date=datetime.now(tz=timezone.utc),
         )
         self.session.add(teamA)
 
@@ -39,7 +38,6 @@ class TestNBAGameORM(unittest.TestCase):
             abbreviation='CLE',
             status='active',
             created_by='pycrawl',
-            creation_date=datetime.now(tz=timezone.utc),
         )
         self.session.add(teamB)
 
@@ -48,7 +46,6 @@ class TestNBAGameORM(unittest.TestCase):
             abbreviation='NBA',
             sport='basketball',
             created_by='pycrawl',
-            creation_date=datetime.now(tz=timezone.utc),
         )
         self.session.add(league)
         self.session.commit()
@@ -60,7 +57,6 @@ class TestNBAGameORM(unittest.TestCase):
             start_year=date(2018, 1, 1),
             end_year=date(2019, 1, 1),
             created_by='pycrawl',
-            creation_date=datetime.now(tz=timezone.utc),
         )
         self.session.add(season)
         self.session.commit()
@@ -77,7 +73,6 @@ class TestNBAGameORM(unittest.TestCase):
             status='scheduled',
             type='season',
             created_by='pycrawl',
-            creation_date=datetime.now(tz=timezone.utc),
         )
         self.session.add(nba_game)
         self.session.commit()

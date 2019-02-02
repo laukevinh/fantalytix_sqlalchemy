@@ -28,7 +28,6 @@ class TestSeasonORM(unittest.TestCase):
             abbreviation='NBA',
             sport='basketball',
             created_by='pycrawl',
-            creation_date=datetime.now(tz=timezone.utc),
         )
         self.session.add(league)
         self.session.commit()
@@ -40,7 +39,6 @@ class TestSeasonORM(unittest.TestCase):
             start_year=date(2018, 1, 1),
             end_year=date(2019, 1, 1),
             created_by='pycrawl',
-            creation_date=datetime.now(tz=timezone.utc)
         )
         self.session.add(season)
         self.session.commit()

@@ -31,7 +31,6 @@ class TestPlayerUrlORM(unittest.TestCase):
             birthplace = 'in Akron, Ohio',
             nationality = 'us',
             created_by='pycrawl',
-            creation_date=datetime.now(tz=timezone.utc),
         )
         self.session.add(player)
         self.session.commit()
@@ -41,7 +40,6 @@ class TestPlayerUrlORM(unittest.TestCase):
             url='https://www.basketball-reference.com/players/j/jamesle01.html', 
             site='basketball-reference',
             created_by='pycrawl',
-            creation_date=datetime.now(tz=timezone.utc)
         )
         self.session.add(player_url)
         self.session.commit()
