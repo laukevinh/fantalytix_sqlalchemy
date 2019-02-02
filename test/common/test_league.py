@@ -26,13 +26,19 @@ class TestLeagueORM(unittest.TestCase):
             abbreviation='NBA',
             sport='basketball',
             created_by='pycrawl',
-            creation_date=datetime.now(tz=timezone.utc),
         )
         self.session.add(league)
+        self.session.commit()
         self.assertEqual(
             self.session.query(League).filter_by(abbreviation='NBA').one(),
             league
         )
+
+        league.abbreviation="nba"
+        self.session.add(league)
+        self.session.commit()
+
+        self.assertTrue(league.creation_date < league.last_updated_date)
 
 if __name__ == '__main__':
     unittest.main()

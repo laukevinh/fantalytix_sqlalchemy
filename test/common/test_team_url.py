@@ -28,7 +28,6 @@ class TestTeamUrlORM(unittest.TestCase):
             abbreviation= 'GSW',
             status='active',
             created_by='pycrawl',
-            creation_date=datetime.now(tz=timezone.utc),
         )
         self.session.add(team)
         self.session.commit()
@@ -38,7 +37,6 @@ class TestTeamUrlORM(unittest.TestCase):
             url='https://www.basketball-reference.com/teams/GSW/',
             site='basketball-reference',
             created_by='pycrawl',
-            creation_date=datetime.now(tz=timezone.utc),
         )
         self.session.add(team_url)
         self.session.commit()

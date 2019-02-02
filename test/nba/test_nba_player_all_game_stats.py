@@ -24,7 +24,6 @@ class TestNBAPlayerAllGameStats(unittest.TestCase):
             abbreviation='GSW',
             status='active',
             created_by='pycrawl',
-            creation_date=datetime.now(tz=timezone.utc),
         )
         self.session.add(self.teamA)
 
@@ -33,7 +32,6 @@ class TestNBAPlayerAllGameStats(unittest.TestCase):
             abbreviation='CLE',
             status='active',
             created_by='pycrawl',
-            creation_date=datetime.now(tz=timezone.utc),
         )
         self.session.add(self.teamB)
 
@@ -45,7 +43,6 @@ class TestNBAPlayerAllGameStats(unittest.TestCase):
             birthplace = 'in Washington, District of Columbia',
             nationality = 'us',
             created_by='pycrawl',
-            creation_date=datetime.now(tz=timezone.utc),
         )
         self.session.add(self.player)
 
@@ -54,7 +51,6 @@ class TestNBAPlayerAllGameStats(unittest.TestCase):
             abbreviation='NBA',
             sport='basketball',
             created_by='pycrawl',
-            creation_date=datetime.now(tz=timezone.utc),
         )
         self.session.add(league)
         self.session.commit()
@@ -66,7 +62,6 @@ class TestNBAPlayerAllGameStats(unittest.TestCase):
             start_year=date(2018, 1, 1),
             end_year=date(2019, 1, 1),
             created_by='pycrawl',
-            creation_date=datetime.now(tz=timezone.utc),
         )
         self.session.add(self.season)
         self.session.commit()
@@ -83,7 +78,6 @@ class TestNBAPlayerAllGameStats(unittest.TestCase):
             status='scheduled',
             type='season',
             created_by='pycrawl',
-            creation_date=datetime.now(tz=timezone.utc),
         )
         self.session.add(self.nba_game)
         self.session.commit()
@@ -127,7 +121,6 @@ class TestNBAPlayerAllGameStats(unittest.TestCase):
             points=25,
             plus_minus=22,
             created_by='pycrawl',
-            creation_date=datetime.now(tz=timezone.utc),
         )
         self.session.add(player_basic_game_stats)
         self.session.commit()
@@ -158,7 +151,6 @@ class TestNBAPlayerAllGameStats(unittest.TestCase):
             offensive_rating=128,
             defensive_rating=105,
             created_by='pycrawl',
-            creation_date=datetime.now(tz=timezone.utc),
         )
         self.session.add(player_adv_game_stats)
         self.session.commit()

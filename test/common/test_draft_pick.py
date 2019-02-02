@@ -37,7 +37,6 @@ class TestDraftPickORM(unittest.TestCase):
             birthplace = 'in Jacksonville, North Carolina',
             nationality = 'us',
             created_by='pycrawl',
-            creation_date=datetime.now(tz=timezone.utc),
         )
         self.session.add(player)
 
@@ -46,7 +45,6 @@ class TestDraftPickORM(unittest.TestCase):
             abbreviation='GSW',
             status='active',
             created_by='pycrawl',
-            creation_date=datetime.now(tz=timezone.utc),
         )
         self.session.add(team)
 
@@ -55,7 +53,6 @@ class TestDraftPickORM(unittest.TestCase):
             abbreviation='NBA',
             sport='basketball',
             created_by='pycrawl',
-            creation_date=datetime.now(tz=timezone.utc),
         )
         self.session.add(league)
         self.session.commit()
@@ -67,7 +64,6 @@ class TestDraftPickORM(unittest.TestCase):
             start_year=date(2018, 1, 1),
             end_year=date(2019, 1, 1),
             created_by='pycrawl',
-            creation_date=datetime.now(tz=timezone.utc),
         )
         self.session.add(season)
         self.session.commit()
@@ -80,7 +76,6 @@ class TestDraftPickORM(unittest.TestCase):
             team=team,
             player=player,
             created_by='pycrawl',
-            creation_date=datetime.now(tz=timezone.utc),
         )
         self.session.add(draft_pick)
         self.session.commit()
